@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            multiDexEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-annotations:28.0.0'
+}
+
+
+publish {
+    artifactId = 'xwebview'
+    uploadName = 'XWebView'
+    userOrg = rootProject.userOrg
+    groupId = rootProject.groupId
+    publishVersion = rootProject.publishVersion
+    desc = rootProject.desc
+    website = rootProject.website
+    licences = rootProject.licences
+}
